@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+import TaskList from "./components/task-list";
+import NewTaskForm from "./components/new-task-form";
+import Footer from "./components/footer";
+import "./App.css";
+
+const App = () => {
+  const tasks = [
+    {
+      id: 1,
+      text: "Completed task",
+      completed: true,
+      timeAgo: "17 seconds",
+      editing: false,
+    },
+    {
+      id: 2,
+      text: "Editing task",
+      completed: false,
+      timeAgo: "10 seconds",
+      editing: true,
+    },
+    {
+      id: 3,
+      text: "Active task",
+      completed: false,
+      timeAgo: "5 minutes",
+      editing: false,
+    },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1 className="app-title">todos</h1>
+
+      <div className="task-list-container">
+        <NewTaskForm />
+        <TaskList tasks={tasks} />
+        <Footer />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
