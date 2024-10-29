@@ -14,6 +14,10 @@
   padding: 10px 0;
 }
 
+.task-item:has(.task-edit-input) {
+  padding: 0;
+}
+
 .task-item.completed .task-text span {
   color: #cdcdcd;
   text-decoration: line-through;

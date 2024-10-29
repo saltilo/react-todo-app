@@ -1,7 +1,9 @@
 import React from "react";
 import "./Task.css";
 
-const Task = ({ task }) => {
+const Task = ({ task, toggleTaskCompletion, deleteTask }) => {
+  const { id, text, completed, editing } = task;
+
   return (
     <li className={`task-item ${task.completed ? "completed" : ""}`}>
       {!task.editing && (
@@ -10,7 +12,7 @@ const Task = ({ task }) => {
             type="checkbox"
             id={`checkbox-${task.id}`}
             checked={task.completed}
-            readOnly
+            onChange={() => toggleTaskCompletion(task.id)}
           />
           <label htmlFor={`checkbox-${task.id}`} />
         </div>
@@ -25,7 +27,9 @@ const Task = ({ task }) => {
       {!task.editing && (
         <div className="task-actions">
           <button className="task-edit-button">✎</button>
-          <button className="task-delete-button">×</button>
+          <button className="task-delete-button" onClick={() => deleteTask(id)}>
+            ×
+          </button>
         </div>
       )}
     </li>
