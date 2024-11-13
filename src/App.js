@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/jsx-no-comment-textnodes */
 import { useState } from "react";
 
 import TaskList from "./components/task-list";
@@ -23,8 +25,8 @@ const App = () => {
   const toggleTaskCompletion = (taskID) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
-        task.id === taskID ? { ...task, completed: !task.completed } : task
-      )
+        task.id === taskID ? { ...task, completed: !task.completed } : task,
+      ),
     );
   };
 
@@ -33,8 +35,8 @@ const App = () => {
       prevTasks.map((task) =>
         task.id === taskId
           ? { ...task, editing: !task.editing, text: newText || task.text }
-          : task
-      )
+          : task,
+      ),
     );
   };
 

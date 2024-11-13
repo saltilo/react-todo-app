@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import PropTypes from "prop-types";
 import Task from "../task";
 import "./TaskList.css";
@@ -31,7 +32,7 @@ TaskList.propTypes = {
       completed: PropTypes.bool.isRequired,
       editing: PropTypes.bool,
       createdAt: PropTypes.instanceOf(Date).isRequired,
-    })
+    }),
   ),
   toggleTaskCompletion: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
