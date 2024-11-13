@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import "./TasksFilter.css";
 
 const filterButtons = [
@@ -26,6 +26,15 @@ const TasksFilter = ({ filter, onFilterChange }) => {
       })}
     </div>
   );
+};
+
+TasksFilter.propTypes = {
+  filter: PropTypes.oneOf(["all", "active", "completed"]),
+  onFilterChange: PropTypes.func.isRequired,
+};
+
+TasksFilter.defaultProps = {
+  filter: "all",
 };
 
 export default TasksFilter;

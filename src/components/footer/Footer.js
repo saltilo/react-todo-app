@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import TasksFilter from "../tasks-filter";
 import "./Footer.css";
 
@@ -15,6 +15,17 @@ const Footer = ({ tasksLeft, filter, onFilterChange, onClearCompleted }) => {
       </button>
     </footer>
   );
+};
+
+Footer.propTypes = {
+  tasksLeft: PropTypes.number.isRequired,
+  filter: PropTypes.oneOf(["all", "active", "completed"]),
+  onFilterChange: PropTypes.func.isRequired,
+  onClearCompleted: PropTypes.func.isRequired,
+};
+
+Footer.defaultProps = {
+  filter: "all",
 };
 
 export default Footer;

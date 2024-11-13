@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { formatDistanceToNow } from "date-fns";
+import { useState } from "react";
 
 import TaskList from "./components/task-list";
 import NewTaskForm from "./components/new-task-form";
@@ -25,6 +24,16 @@ const App = () => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id === taskID ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
+
+  const toggleEditing = (taskId, newText) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId
+          ? { ...task, editing: !task.editing, text: newText || task.text }
+          : task
       )
     );
   };
@@ -60,6 +69,7 @@ const App = () => {
           tasks={filteredTasks}
           toggleTaskCompletion={toggleTaskCompletion}
           deleteTask={deleteTask}
+          toggleEditing={toggleEditing}
         />
         <Footer
           tasksLeft={tasksLeft}
