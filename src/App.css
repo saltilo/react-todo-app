@@ -64,6 +64,14 @@ button {
   border-radius: 6px;
 }
 
+@media (max-width: 768px) {
+  .task-list-container {
+    min-width: auto;
+    max-width: 100%;
+    margin: 0 10px;
+  }
+}
+
 .task-list {
   max-height: 400px;
   overflow-y: auto;
