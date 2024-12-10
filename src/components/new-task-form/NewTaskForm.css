@@ -5,12 +5,13 @@
   border: none;
   outline: none;
   background: rgba(0, 0, 0, 0.003);
+  padding: 16px 16px 16px 60px;
   box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0);
 }
 
 .new-task-input {
   width: 100%;
-  padding: 16px 16px 16px 60px;
+
   border: none;
   outline: none;
   font-size: 24px;
@@ -18,6 +19,15 @@
   font-weight: inherit;
 }
 
+.new-task-input-timer {
+  border: none;
+  outline: none;
+  font-size: 24px;
+  padding-left: 16px;
+  width: 20%;
+}
+
+.new-task-input-timer,
 .new-task-input::placeholder {
   font-style: italic;
   font-family: inherit;

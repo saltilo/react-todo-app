@@ -1,6 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/jsx-no-comment-textnodes */
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import TaskList from "./components/task-list";
 import NewTaskForm from "./components/new-task-form";
@@ -10,22 +9,32 @@ import "./App.css";
 const App = () => {
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState("all");
+  const timersRef = useRef({});
 
-  const addTask = (text) => {
+  const addTask = (text, timer) => {
     const newTask = {
       id: Date.now(),
       text,
       completed: false,
       createdAt: new Date(),
       editing: false,
+      timer,
+      isTimerRunning: false,
     };
     setTasks((prevTasks) => [...prevTasks, newTask]);
   };
 
-  const toggleTaskCompletion = (taskID) => {
+  const toggleTaskCompletion = (taskId) => {
+    stopTimer(taskId);
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
-        task.id === taskID ? { ...task, completed: !task.completed } : task,
+        task.id === taskId
+          ? {
+              ...task,
+              completed: !task.completed,
+              timer: !task.completed ? 0 : task.timer,
+            }
+          : task,
       ),
     );
   };
@@ -41,6 +50,7 @@ const App = () => {
   };
 
   const deleteTask = (taskId) => {
+    stopTimer(taskId);
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
   };
 
@@ -49,7 +59,37 @@ const App = () => {
   };
 
   const clearCompletedTasks = () => {
+    tasks.forEach((task) => {
+      if (task.completed) stopTimer(task.id);
+    });
     setTasks((prevTasks) => prevTasks.filter((task) => !task.completed));
+  };
+
+  const startTimer = (taskId) => {
+    if (!timersRef.current[taskId]) {
+      timersRef.current[taskId] = setInterval(() => {
+        setTasks((tasks) =>
+          tasks.map((task) => {
+            if (task.id === taskId && task.timer > 0) {
+              return { ...task, timer: task.timer - 1 };
+            } else if (task.id === taskId && task.timer <= 0) {
+              stopTimer(taskId);
+            }
+            return task;
+          }),
+        );
+      }, 1000);
+    }
+  };
+
+  const stopTimer = (taskId) => {
+    clearInterval(timersRef.current[taskId]);
+    delete timersRef.current[taskId];
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId ? { ...task, isTimerRunning: false } : task,
+      ),
+    );
   };
 
   const filteredTasks = tasks.filter((task) => {
@@ -72,6 +112,8 @@ const App = () => {
           toggleTaskCompletion={toggleTaskCompletion}
           deleteTask={deleteTask}
           toggleEditing={toggleEditing}
+          startTimer={startTimer}
+          stopTimer={stopTimer}
         />
         <Footer
           tasksLeft={tasksLeft}

@@ -17,7 +17,7 @@
   padding: 0;
 }
 
-.task-item.completed .task-text span {
+.task-item.completed .task-text {
   color: #cdcdcd;
   text-decoration: line-through;
 }
@@ -102,4 +102,31 @@
 .task-time {
   color: gray;
   font-size: 13px;
+}
+
+.task-time span {
+  margin-right: 1em;
+}
+
+.task-timer-buttons {
+  margin-right: 0.5em;
+}
+
+.task-timer-buttons button {
+  list-style: none;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  appearance: none;
+  background: none;
+  border: 0;
+  font-family: inherit;
+  font-weight: inherit;
+  vertical-align: initial;
+  color: #cc9a9a;
+  cursor: pointer;
+  margin: auto 0;
+  transition: color 0.2s ease-out;
+  height: 18px;
+  width: 18px;
+  font-size: 15px;
 }

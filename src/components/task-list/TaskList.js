@@ -8,6 +8,8 @@ const TaskList = ({
   toggleTaskCompletion,
   deleteTask,
   toggleEditing,
+  startTimer,
+  stopTimer,
 }) => {
   return (
     <ul className="task-list">
@@ -18,6 +20,8 @@ const TaskList = ({
           toggleTaskCompletion={toggleTaskCompletion}
           deleteTask={deleteTask}
           toggleEditing={toggleEditing}
+          startTimer={startTimer}
+          stopTimer={stopTimer}
         />
       ))}
     </ul>
@@ -32,11 +36,14 @@ TaskList.propTypes = {
       completed: PropTypes.bool.isRequired,
       editing: PropTypes.bool,
       createdAt: PropTypes.instanceOf(Date).isRequired,
+      timer: PropTypes.number.isRequired,
     }),
-  ),
+  ).isRequired,
   toggleTaskCompletion: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
   toggleEditing: PropTypes.func.isRequired,
+  startTimer: PropTypes.func.isRequired,
+  stopTimer: PropTypes.func.isRequired,
 };
 
 TaskList.defaultProps = {
