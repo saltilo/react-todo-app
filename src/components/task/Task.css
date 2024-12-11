@@ -130,3 +130,7 @@
   width: 18px;
   font-size: 15px;
 }
+
+.task-timer-buttons button:hover {
+  color: #af5b5e;
+}

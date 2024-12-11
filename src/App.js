@@ -79,12 +79,21 @@ const App = () => {
           }),
         );
       }, 1000);
+
+      setTasks((tasks) =>
+        tasks.map((task) =>
+          task.id === taskId ? { ...task, isTimerRunning: true } : task,
+        ),
+      );
     }
   };
 
   const stopTimer = (taskId) => {
-    clearInterval(timersRef.current[taskId]);
-    delete timersRef.current[taskId];
+    if (timersRef.current[taskId]) {
+      clearInterval(timersRef.current[taskId]);
+      delete timersRef.current[taskId];
+    }
+
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id === taskId ? { ...task, isTimerRunning: false } : task,
